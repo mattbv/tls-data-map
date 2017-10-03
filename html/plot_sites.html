@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<head>    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <script>L_PREFER_CANVAS = false; L_NO_TOUCH = false; L_DISABLE_3D = false;</script>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.2.0/dist/leaflet.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.2.0/dist/leaflet.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap-theme.min.css" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.6.3/css/font-awesome.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css" />
+    <link rel="stylesheet" href="https://rawgit.com/python-visualization/folium/master/folium/templates/leaflet.awesome.rotate.css" />
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    
+            <style> #map_1e87ab3d35fd472ea41b57d3098edced {
+                position : relative;
+                width : 100.0%;
+                height: 100.0%;
+                left: 0.0%;
+                top: 0.0%;
+                }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css" />
+</head>
+<body>    
+    
+            <div class="folium-map" id="map_1e87ab3d35fd472ea41b57d3098edced" ></div>
+        
+</body>
+<script>    
+    
+
+            
+                var bounds = null;
+            
+
+            var map_1e87ab3d35fd472ea41b57d3098edced = L.map(
+                                  'map_1e87ab3d35fd472ea41b57d3098edced',
+                                  {center: [0,0],
+                                  zoom: 2,
+                                  maxBounds: bounds,
+                                  layers: [],
+                                  worldCopyJump: false,
+                                  crs: L.CRS.EPSG3857
+                                 });
+            
+        
+    
+            var tile_layer_9267eaf1b3fb4bcdbfac83b6d6a99638 = L.tileLayer(
+                'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',
+                {
+  "attribution": null, 
+  "detectRetina": false, 
+  "maxZoom": 18, 
+  "minZoom": 1, 
+  "noWrap": false, 
+  "subdomains": "abc"
+}
+                ).addTo(map_1e87ab3d35fd472ea41b57d3098edced);
+        
+    
+            var marker_cluster_750eeb2dac7e4d9d9bb5fd5267c250e6 = L.markerClusterGroup({
+                
+            });
+            map_1e87ab3d35fd472ea41b57d3098edced.addLayer(marker_cluster_750eeb2dac7e4d9d9bb5fd5267c250e6);
+            
+    
+
+            var marker_51bc39770c1f4459aff54e6fa063cf93 = L.marker(
+                [-2.817529,-60.098896],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_750eeb2dac7e4d9d9bb5fd5267c250e6);
+            
+    
+            var popup_40b8c5d116a04efa98cc602fd8a82e65 = L.popup({maxWidth: '300'});
+
+            
+                var html_e297549beb3e4f1d8b1670973f0c81ae = $('<div id="html_e297549beb3e4f1d8b1670973f0c81ae" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe">   <thead>     <tr style="text-align: right;">       <th></th>       <th>0</th>     </tr>   </thead>   <tbody>     <tr>       <th>SITE_NAME</th>       <td>AmazonFACE</td>     </tr>     <tr>       <th>PLOT_NAME</th>       <td>ring1</td>     </tr>     <tr>       <th>SITE_COUNTRY</th>       <td>Brazil</td>     </tr>     <tr>       <th>SITE_LAT</th>       <td>-2.81753</td>     </tr>     <tr>       <th>SITE_LONG</th>       <td>-60.0989</td>     </tr>     <tr>       <th>SITE_ALT</th>       <td>90</td>     </tr>     <tr>       <th>YEAR</th>       <td>2016</td>     </tr>     <tr>       <th>SCAN_DATES</th>       <td>15-09-16</td>     </tr>     <tr>       <th>NUMBER_OF_SCANS</th>       <td>32</td>     </tr>     <tr>       <th>SCAN_ANGULAR_RES</th>       <td>0.04</td>     </tr>     <tr>       <th>TILT_SCAN</th>       <td>YES</td>     </tr>     <tr>       <th>CAMERA_DATA</th>       <td>NO</td>     </tr>     <tr>       <th>DATA_REGISTERED</th>       <td>YES</td>     </tr>     <tr>       <th>TREES_EXTRACTED</th>       <td>NO</td>     </tr>     <tr>       <th>DATA_PATH</th>       <td>/data/eos/TLS/brazil/…</td>     </tr>     <tr>       <th>NOTES</th>       <td>just a placeholder information</td>     </tr>   </tbody> </table></div>')[0];
+                popup_40b8c5d116a04efa98cc602fd8a82e65.setContent(html_e297549beb3e4f1d8b1670973f0c81ae);
+            
+
+            marker_51bc39770c1f4459aff54e6fa063cf93.bindPopup(popup_40b8c5d116a04efa98cc602fd8a82e65);
+
+            
+        
+    
+
+            var marker_8f5b28d6459c4aafa12bfbde40f58d8d = L.marker(
+                [-2.817537,-60.09887],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_750eeb2dac7e4d9d9bb5fd5267c250e6);
+            
+    
+            var popup_86c116398ce249569b793f8257d6b435 = L.popup({maxWidth: '300'});
+
+            
+                var html_26ca883202014b9ea1f3e5d3a68459b7 = $('<div id="html_26ca883202014b9ea1f3e5d3a68459b7" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe">   <thead>     <tr style="text-align: right;">       <th></th>       <th>1</th>     </tr>   </thead>   <tbody>     <tr>       <th>SITE_NAME</th>       <td>AmazonFACE</td>     </tr>     <tr>       <th>PLOT_NAME</th>       <td>ring1</td>     </tr>     <tr>       <th>SITE_COUNTRY</th>       <td>Brazil</td>     </tr>     <tr>       <th>SITE_LAT</th>       <td>-2.81754</td>     </tr>     <tr>       <th>SITE_LONG</th>       <td>-60.0989</td>     </tr>     <tr>       <th>SITE_ALT</th>       <td>90</td>     </tr>     <tr>       <th>YEAR</th>       <td>2016</td>     </tr>     <tr>       <th>SCAN_DATES</th>       <td>15-09-16</td>     </tr>     <tr>       <th>NUMBER_OF_SCANS</th>       <td>32</td>     </tr>     <tr>       <th>SCAN_ANGULAR_RES</th>       <td>0.04</td>     </tr>     <tr>       <th>TILT_SCAN</th>       <td>YES</td>     </tr>     <tr>       <th>CAMERA_DATA</th>       <td>NO</td>     </tr>     <tr>       <th>DATA_REGISTERED</th>       <td>YES</td>     </tr>     <tr>       <th>TREES_EXTRACTED</th>       <td>NO</td>     </tr>     <tr>       <th>DATA_PATH</th>       <td>/data/eos/TLS/brazil/…</td>     </tr>     <tr>       <th>NOTES</th>       <td>just a placeholder information</td>     </tr>   </tbody> </table></div>')[0];
+                popup_86c116398ce249569b793f8257d6b435.setContent(html_26ca883202014b9ea1f3e5d3a68459b7);
+            
+
+            marker_8f5b28d6459c4aafa12bfbde40f58d8d.bindPopup(popup_86c116398ce249569b793f8257d6b435);
+
+            
+        
+    
+
+            var marker_f26ab36a915a48c699cdbaf7b8bd8673 = L.marker(
+                [-2.817549,-60.098866],
+                {
+                    icon: new L.Icon.Default()
+                    }
+                )
+                .addTo(marker_cluster_750eeb2dac7e4d9d9bb5fd5267c250e6);
+            
+    
+            var popup_87d88ee99a474581a6023f8760c433a0 = L.popup({maxWidth: '300'});
+
+            
+                var html_0faa900fabdd4db98a60b1c91f3bbc4b = $('<div id="html_0faa900fabdd4db98a60b1c91f3bbc4b" style="width: 100.0%; height: 100.0%;"><table border="1" class="dataframe">   <thead>     <tr style="text-align: right;">       <th></th>       <th>2</th>     </tr>   </thead>   <tbody>     <tr>       <th>SITE_NAME</th>       <td>AmazonFACE</td>     </tr>     <tr>       <th>PLOT_NAME</th>       <td>ring1</td>     </tr>     <tr>       <th>SITE_COUNTRY</th>       <td>Brazil</td>     </tr>     <tr>       <th>SITE_LAT</th>       <td>-2.81755</td>     </tr>     <tr>       <th>SITE_LONG</th>       <td>-60.0989</td>     </tr>     <tr>       <th>SITE_ALT</th>       <td>90</td>     </tr>     <tr>       <th>YEAR</th>       <td>2016</td>     </tr>     <tr>       <th>SCAN_DATES</th>       <td>15-09-16</td>     </tr>     <tr>       <th>NUMBER_OF_SCANS</th>       <td>32</td>     </tr>     <tr>       <th>SCAN_ANGULAR_RES</th>       <td>0.04</td>     </tr>     <tr>       <th>TILT_SCAN</th>       <td>YES</td>     </tr>     <tr>       <th>CAMERA_DATA</th>       <td>NO</td>     </tr>     <tr>       <th>DATA_REGISTERED</th>       <td>YES</td>     </tr>     <tr>       <th>TREES_EXTRACTED</th>       <td>NO</td>     </tr>     <tr>       <th>DATA_PATH</th>       <td>/data/eos/TLS/brazil/…</td>     </tr>     <tr>       <th>NOTES</th>       <td>just a placeholder information</td>     </tr>   </tbody> </table></div>')[0];
+                popup_87d88ee99a474581a6023f8760c433a0.setContent(html_0faa900fabdd4db98a60b1c91f3bbc4b);
+            
+
+            marker_f26ab36a915a48c699cdbaf7b8bd8673.bindPopup(popup_87d88ee99a474581a6023f8760c433a0);
+
+            
+        
+</script>

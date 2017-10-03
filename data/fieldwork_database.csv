@@ -1,0 +1,4 @@
+﻿SITE_NAME,PLOT_NAME,SITE_COUNTRY,SITE_LAT,SITE_LONG,SITE_ALT,YEAR,SCAN_DATES,NUMBER_OF_SCANS,SCAN_ANGULAR_RES,TILT_SCAN,CAMERA_DATA,DATA_REGISTERED,TREES_EXTRACTED,DATA_PATH,NOTES
+AmazonFACE,ring1,Brazil,-2.817529,-60.098896,90,2016,15-09-16,32,0.04,YES,NO,YES,NO,/data/eos/TLS/brazil/…,just a placeholder information
+AmazonFACE,ring1,Brazil,-2.817537,-60.09887,90,2016,15-09-16,32,0.04,YES,NO,YES,NO,/data/eos/TLS/brazil/…,just a placeholder information
+AmazonFACE,ring1,Brazil,-2.817549,-60.098866,90,2016,15-09-16,32,0.04,YES,NO,YES,NO,/data/eos/TLS/brazil/…,just a placeholder information
