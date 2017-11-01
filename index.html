@@ -1,6 +1,6 @@
 <html>
     <head>
-        <title>Hack Spots</title>
+        <title>LiDAR field campaigns map</title>
         <meta charset='utf-8'>
         <script type="text/javascript" src='js/jquery.js '></script>
         <script type="text/javascript" src='js/tabletop1.3.4.js'></script>
@@ -54,9 +54,9 @@
 
     <script id="hackSpotsTable" type="text/html">
         <table>
-            <tr><th class="tHeader">Name</th><th class="tHeader">Location</th><th class="tHeader">Country</th><th class="tHeader">Year</th><th class="">Elsewhere</th></tr>
+            <tr><th class="tHeader">Location</th><th class="tHeader">Plot name</th><th class="tHeader">Country</th><th class="tHeader">Year</th><th class="">Elsewhere</th></tr>
             {{#rows}}
-                <tr id="{{rowNumber}}" class="spotRow"><td>{{name}}</td><td>{{location}}</td><td>{{country}}</td><td>{{year}}</td><td><a class="button" href="https://maps.google.com/maps?q={{lat}},{{long}}" target="_blank">G Map</a> </td></tr>
+                <tr id="{{rowNumber}}" class="spotRow"><td>{{location}}</td><td>{{plot}}</td><td>{{country}}</td><td>{{year}}</td><td><a class="button" href="https://maps.google.com/maps?q={{lat}},{{long}}" target="_blank">G Map</a> </td></tr>
             {{/rows}}
         </table>
     </script>
@@ -65,17 +65,26 @@
         {{#rows}}
             <h4 class="fauxButton">MOST RECENT SPOT</h4>
             <h2>{{location}}</h2>
-            <p class="colorText">{{name}}<p>
+            <p class="colorText">{{plot}}<p>
             <p class="colorText">{{country}} {{year}}</p>
             <ul>
                 <li><span class="category">Date:</span> {{date}}</li>
-                <li><span class="category">Plot code:</span> {{plot}}</li>
                 <li><span class="category">Personnel:</span> {{personnel}}</li>
                 <li><span class="category">Vegetation:</span> {{vegetation}}</li>
                 <li><span class="category">Area:</span> {{area}}</li>
                 <li><span class="category">Instrument:</span> {{instrument}}</li>
                 <li><span class="category">Scan pattern:</span> {{scanpattern}}</li>
-                <li><span class="category">Angular resolution:</span> {{angularresolution}}</li>		
+                <li><span class="category">Angular resolution:</span> {{angularresolution}}</li>
+                <li><span class="category">Project name:</span> {{riproject}}</li>	
+                <li><span class="category">Storage path:</span> {{path}}</li>
+                <li><span class="category">RGB:</span> {{rgb}}</li>	
+                <li><span class="category">Waveform:</span> {{waveform}}</li>	
+                <li><span class="category">Registered:</span> {{registered}}</li>	
+                <li><span class="category">Extracted:</span> {{extracted}}</li>
+                <li><span class="category">Modelled:</span> {{modelled}}</li>
+                <li><span class="category">Processing comments:</span> {{proc}}</li>	
+                <li><span class="category">Comments:</span> {{comments}}</li>
+                <li><span class="category">Media:</span> {{media}}</li>					
             </ul>
         {{/rows}}
     </script>
@@ -88,17 +97,26 @@
         {{#rows}}
             <h4 class="fauxButton">SELECTED SPOT</h4>
             <h2>{{location}}</h2>
-            <p class="colorText">{{name}}<p>
+            <p class="colorText">{{plot}}<p>
             <p class="colorText">{{country}} {{year}}</p>
             <ul>
                 <li><span class="category">Date:</span> {{date}}</li>
-                <li><span class="category">Plot code:</span> {{plot}}</li>
                 <li><span class="category">Personnel:</span> {{personnel}}</li>
                 <li><span class="category">Vegetation:</span> {{vegetation}}</li>
                 <li><span class="category">Area:</span> {{area}}</li>
                 <li><span class="category">Instrument:</span> {{instrument}}</li>
                 <li><span class="category">Scan pattern:</span> {{scanpattern}}</li>
-                <li><span class="category">Angular resolution:</span> {{angularresolution}}</li>		
+                <li><span class="category">Angular resolution:</span> {{angularresolution}}</li>
+                <li><span class="category">Project name:</span> {{riproject}}</li>	
+                <li><span class="category">Storage path:</span> {{path}}</li>
+                <li><span class="category">RGB:</span> {{rgb}}</li>	
+                <li><span class="category">Waveform:</span> {{waveform}}</li>	
+                <li><span class="category">Registered:</span> {{registered}}</li>	
+                <li><span class="category">Extracted:</span> {{extracted}}</li>
+                <li><span class="category">Modelled:</span> {{modelled}}</li>
+                <li><span class="category">Processing comments:</span> {{proc}}</li>	
+                <li><span class="category">Comments:</span> {{comments}}</li>
+                <li><span class="category">Media:</span> {{media}}</li>				
             </ul>
         {{/rows}}
     </script>
@@ -123,13 +141,13 @@
 
             // create geoJSON with coordinates and other
             // useful bits from the original data
-            var optionsJSON = ["location", "name", "country", "rowNumber"]
+            var optionsJSON = ["location", "plot", "country", "rowNumber"]
             var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
 
             // create map, tilelayer (map background), markers and popups
             var map = Sheetsee.loadMap("map")
             Sheetsee.addTileLayer(map, 'jllord.n7aml2bc')
-            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ name }}</h2>", true)
+            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ location }}</h2>", true)
 
             // find the latest spot with the most important
             // info filled in (to prevent map breaking if
@@ -166,7 +184,7 @@
                 var latestCompleteSpot = []
                 var startWithLatestRow = data.reverse()
                 startWithLatestRow.forEach(function(row){
-                    if (!row.lat || !row.long || !row.name || !row.location || !row.country) return
+                    if (!row.lat || !row.long || !row.location || !row.country) return
                     else latestCompleteSpot.push(row)
                 })
                 return latestCompleteSpot[0]
