@@ -1,0 +1,222 @@
+<html>
+    <head>
+        <title>Hack Spots</title>
+        <meta charset='utf-8'>
+        <script type="text/javascript" src='js/jquery.js '></script>
+        <script type="text/javascript" src='js/tabletop1.3.4.js'></script>
+        <script type="text/javascript" src='js/sheetsee.js'></script>
+        <script type="text/javascript" src='js/leaflet.markercluster.js'></script>
+        <link rel="shortcut icon" href="https://raw.github.com/jlord/hack-spots/master/favico.png"/>
+
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+        <link href='https://api.tiles.mapbox.com/mapbox.js/v1.4.0/mapbox.css' rel='stylesheet' />
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Lato:300,400,700,300italic'>
+        <link rel='stylesheet' type='text/css' href='https://fonts.googleapis.com/css?family=Open+Sans:400,700'>
+        <link media="screen" rel="stylesheet" type="text/css" href="css/style.css">
+        <link media="screen" rel="stylesheet" type="text/css" href="css/site.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css" />
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+    </head>
+<body>
+    <div id="wrapper">
+        <h1>LiDAR field campaigns map</h1>
+        <div>
+            <h3>INFO</h3>
+            <p>This website presents a map of all recorded LiDAR fieldworks from the EO/RS group at the Dept. of Geography, University College London.</p>
+			<div id="theNumberofSpots"></div>
+        </div>
+        <div class="container">
+            <div id="rightSide">
+                <div id="latestSpot"></div>
+                <div id="selectedSpot"></div>
+            </div>
+            <div id="map"></div>
+        </div>
+        <div class="container">
+            <input id="tableFilter" type="text" placeholder="filter by.."></input>
+            <span class="clear button">Clear</span> <span class="resetMap button">Reset Map</span>
+            <span class="noMatches">no matches</span>
+            <div id="hackSpotsTable"></div>
+        </div>
+        <div id="info" class="container">
+			<p>
+			
+			</p>
+            <ul class="nav">
+                <li><strong>Website based on code from JLLORD.</strong></li>
+                <li><a href="#info">INFO</a> -</li>
+                <li><a href="http://jlord.github.com/sheetsee.js" target="_blank">POWERED BY SHEETSEE.JS</a> -</li>
+                <li><a href="http://www.github.com/jlord/hack-spots" target="_blank">GITHUB</a> -</li>
+                <li><a href="http://www.twitter.com/jllord" target="_blank">@JLLORD</a></li>
+            </ul>
+        </div>
+    </div><!-- end wrapper -->
+
+    <script id="hackSpotsTable" type="text/html">
+        <table>
+            <tr><th class="tHeader">Name</th><th class="tHeader">Location</th><th class="tHeader">Country</th><th class="tHeader">Year</th><th class="">Elsewhere</th></tr>
+            {{#rows}}
+                <tr id="{{rowNumber}}" class="spotRow"><td>{{name}}</td><td>{{location}}</td><td>{{country}}</td><td>{{year}}</td><td><a class="button" href="https://maps.google.com/maps?q={{lat}},{{long}}" target="_blank">G Map</a> </td></tr>
+            {{/rows}}
+        </table>
+    </script>
+
+    <script id="latestSpot" type="text/html">
+        {{#rows}}
+            <h4 class="fauxButton">MOST RECENT SPOT</h4>
+            <h2>{{location}}</h2>
+            <p class="colorText">{{name}}<p>
+            <p class="colorText">{{country}} {{year}}</p>
+            <ul>
+                <li><span class="category">Date:</span> {{date}}</li>
+                <li><span class="category">Plot code:</span> {{plot_code}}</li>
+                <li><span class="category">Personnel:</span> {{personnel}}</li>
+                <li><span class="category">Vegetation:</span> {{vegetation}}</li>
+                <li><span class="category">Area:</span> {{area_ha}}</li>
+                <li><span class="category">Instrument:</span> {{instrument}}</li>
+                <li><span class="category">Scan pattern:</span> {{scan_pattern}}</li>
+                <li><span class="category">Angular resolution:</span> {{angular_resolution}}</li>		
+            </ul>
+        {{/rows}}
+    </script>
+
+    <script id="theNumberofSpots" type="text/html">
+        <p><strong><span class="red-text">{{numberOfSpots}}</span> recorded field campaigns.</p>
+    </script>
+
+    <script id="selectedSpot" type="text/html">
+        {{#rows}}
+            <h4 class="fauxButton">SELECTED SPOT</h4>
+            <h2>{{location}}</h2>
+            <p class="colorText">{{name}}<p>
+            <p class="colorText">{{country}} {{year}}</p>
+            <ul>
+                <li><span class="category">Date:</span> {{date}}</li>
+                <li><span class="category">Plot code:</span> {{plot_code}}</li>
+                <li><span class="category">Personnel:</span> {{personnel}}</li>
+                <li><span class="category">Vegetation:</span> {{vegetation}}</li>
+                <li><span class="category">Area:</span> {{area_ha}}</li>
+                <li><span class="category">Instrument:</span> {{instrument}}</li>
+                <li><span class="category">Scan pattern:</span> {{scan_pattern}}</li>
+                <li><span class="category">Angular resolution:</span> {{angular_resolution}}</li>		
+            </ul>
+        {{/rows}}
+    </script>
+
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var gData
+            var URL = "1igSlhqWOov5NUL8UTCuq9k5weeDH1Grc7ChnWvibyCk"
+                Tabletop.init({ key: URL, callback: showInfo, simpleSheet: true })
+        })
+
+        // so long, so messy
+        function showInfo(gData) {
+            tableOptions = {
+                "data": gData,
+                "tableDiv": "#hackSpotsTable",
+                "filterDiv": "#tableFilter"
+            }
+            // make the table, and the search bar
+            Sheetsee.makeTable(tableOptions)
+            Sheetsee.initiateTableFilter(tableOptions)
+
+            // create geoJSON with coordinates and other
+            // useful bits from the original data
+            var optionsJSON = ["location", "name", "country", "rowNumber"]
+            var geoJSON = Sheetsee.createGeoJSON(gData, optionsJSON)
+
+            // create map, tilelayer (map background), markers and popups
+            var map = Sheetsee.loadMap("map")
+            Sheetsee.addTileLayer(map, 'jllord.n7aml2bc')
+            var markerLayer = Sheetsee.addMarkerLayer(geoJSON, map, "<h2>{{ name }}</h2>", true)
+
+            // find the latest spot with the most important
+            // info filled in (to prevent map breaking if
+            // someone is currently editing spreadsheet)
+            var theLatestSpot = findLatestCompleteSpot(gData)
+            var latestSpot = Sheetsee.ich.latestSpot({
+                rows: theLatestSpot
+            })
+            // set it and pan to it
+            $('#latestSpot').html(latestSpot)
+            map.setView([theLatestSpot.lat, theLatestSpot.long], 14)
+
+            // when someone clicks on a row, highlight it and
+            // re-center the map
+            // TODO show popup, change marker color
+            $('.spotRow').live("click", function(event) {
+                $('.spotRow').removeClass("selectedRow")
+                var rowNumber = $(this).closest("tr").attr("id")
+                $('#' + rowNumber).addClass("selectedRow")
+                var dataElement = Sheetsee.getMatches(gData, rowNumber, "rowNumber")
+                var selectedSpot = Sheetsee.ich.selectedSpot({
+                    rows: dataElement
+                })
+                $('#latestSpot').css("display", "none")
+                $('#selectedSpot').html(selectedSpot).css("display", "inline")
+                var selectedCoords = [dataElement[0].lat, dataElement[0].long]
+                map.setView(selectedCoords, 14)
+            })
+
+            // so that the first map and info that loads
+            // is complete and doesn't show rows that are
+            // actively being edited by folk
+            function findLatestCompleteSpot(data) {
+                var latestCompleteSpot = []
+                var startWithLatestRow = data.reverse()
+                startWithLatestRow.forEach(function(row){
+                    if (!row.lat || !row.long || !row.name || !row.location || !row.country) return
+                    else latestCompleteSpot.push(row)
+                })
+                return latestCompleteSpot[0]
+            }
+
+            // Add click listener to the markerLayer
+            markerLayer.on('click', function(e) {
+                // clear any selected rows
+                $('.spotRow').removeClass("selectedRow")
+                // get row number of selected marker
+                var rowNumber = e.layer.feature.opts.rowNumber
+                // find that row in the table and make consider it selected
+                $('#' + rowNumber).addClass("selectedRow")
+                // using row number, get the data for the selected spot
+                var dataElement = Sheetsee.getMatches(gData, rowNumber.toString(), "rowNumber")
+                // take those details and re-write the selected spot section
+                var selectedSpot = Sheetsee.ich.selectedSpot({
+                    rows: dataElement
+                })
+                // center the map on the selected element
+                map.panTo([dataElement[0].lat, dataElement[0].long])
+                // update the spot listing
+                $('#latestSpot').css("display", "none")
+                $('#selectedSpot').html(selectedSpot).css("display", "inline")
+            })
+
+            // reset the map, zoom out, and recenter on 0,0
+            $('.resetMap').click(function() {
+                $('.spotRow').removeClass("selectedRow")
+                $('#latestSpot').css("display", "inline")
+                $('#selectedSpot').css("display", "none")
+                map.setView([0,0], 1)
+            })
+
+            // find total number of spots added
+            var theNumberofSpots = Sheetsee.ich.theNumberofSpots({
+                numberOfSpots: gData.length
+            })
+            $('#theNumberofSpots').html(theNumberofSpots)
+
+            if(window.location.hash) {
+                $('#tableFilter').val(window.location.hash.substring(1)).keyup()
+                $('.spotRow').first().click()
+            }
+        }
+
+        $(document).on('keyup', '#tableFilter', function() {
+            window.location.hash = $(this).val()
+            $('.spotRow').first().click()
+        })
+    </script>
+</body>
+</html>
