@@ -63,29 +63,8 @@
 
     <script id="latestSpot" type="text/html">
         {{#rows}}
-            <h4 class="fauxButton">MOST RECENT SPOT</h4>
-            <h2>{{location}}</h2>
-            <p class="colorText">{{plot}}<p>
-            <p class="colorText">{{country}} {{year}}</p>
-            <ul>
-                <li><span class="category">Date:</span> {{date}}</li>
-                <li><span class="category">Personnel:</span> {{personnel}}</li>
-                <li><span class="category">Vegetation:</span> {{vegetation}}</li>
-                <li><span class="category">Area:</span> {{area}}</li>
-                <li><span class="category">Instrument:</span> {{instrument}}</li>
-                <li><span class="category">Scan pattern:</span> {{scanpattern}}</li>
-                <li><span class="category">Angular resolution:</span> {{angularresolution}}</li>
-                <li><span class="category">Project name:</span> {{riproject}}</li>	
-                <li><span class="category">Storage path:</span> {{path}}</li>
-                <li><span class="category">RGB:</span> {{rgb}}</li>	
-                <li><span class="category">Waveform:</span> {{waveform}}</li>	
-                <li><span class="category">Registered:</span> {{registered}}</li>	
-                <li><span class="category">Extracted:</span> {{extracted}}</li>
-                <li><span class="category">Modelled:</span> {{modelled}}</li>
-                <li><span class="category">Processing comments:</span> {{proc}}</li>	
-                <li><span class="category">Comments:</span> {{comments}}</li>
-                <li><span class="category">Media:</span> {{media}}</li>					
-            </ul>
+            <h4 class="fauxButton">CAMPAIGN INFO</h4>
+            <h4>Select entry from map or table bellow for more info.</h4>
         {{/rows}}
     </script>
 
@@ -95,7 +74,7 @@
 
     <script id="selectedSpot" type="text/html">
         {{#rows}}
-            <h4 class="fauxButton">SELECTED SPOT</h4>
+            <h4 class="fauxButton">CAMPAIGN INFO</h4>
             <h2>{{location}}</h2>
             <p class="colorText">{{plot}}<p>
             <p class="colorText">{{country}} {{year}}</p>
@@ -146,6 +125,7 @@
 
             // create map, tilelayer (map background), markers and popups
             var map = Sheetsee.loadMap("map")
+			map.options.minZoom = 1;
 			// added option to use scroll wheel to zoom in/out when focus is on map
 			map.once('focus', function() { map.scrollWheelZoom.enable(); });
             Sheetsee.addTileLayer(map, 'jllord.n7aml2bc')
@@ -160,7 +140,7 @@
             })
             // set it and pan to it
             $('#latestSpot').html(latestSpot)
-            map.setView([theLatestSpot.lat, theLatestSpot.long], 14)
+            map.setView([0, 0], 1)
 
             // when someone clicks on a row, highlight it and
             // re-center the map
