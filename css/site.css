@@ -9,9 +9,9 @@ h4 {font-family: Lato; font-size: 24px;}
 img {width: 100%;} 
 p a, a {color: #333; text-decoration: none; padding-bottom: 0px; border-bottom: 1px #0c471c solid;}
 a:hover {color: #47CCFC;}
-small {padding: 10px 0px; font-size: 10px;}
-p {margin: 0px; padding: 0px; font-size: 12px;}
-li {line-height: 19px; font-size: 12px;}
+small {padding: 10px 0px; font-size: 12px;}
+p {margin: 0px; padding: 0px; font-size: 14px;}
+li {line-height: 19px; font-size: 14px;}
 ol {line-height: 24px;}
 a.button {border: none;}
 
@@ -20,7 +20,7 @@ code {font-family: "Consolas", "Ubuntu Mono", monospace; line-height: 22px; font
 
 .red-text {color: #0b8920;}
 
-#map {height: 400px; max-width: 530px; min-width: 300px; background: #DADADA;}
+#map {height: 500px; max-width: 530px; min-width: 300px; background: #DADADA;}
 #map a {border: none;}
 
 .container {margin: 24px 0px;}
@@ -44,10 +44,10 @@ ul.nav li a:hover {border-bottom: 1px #58cace solid;}
 
 .leaflet-popup-content h2 {font-family: Lato; font-size: 14px; text-transform: uppercase;}
 
-#rightSide {height: 400px; max-width: 350px; width: 100%; float: right; padding-top: 5px;}
+#rightSide {height: 500px; max-width: 350px; width: 100%; float: right; padding-top: 5px;}
 #selectedSpot {display: none;}
 #latestSpot ul, #selectedSpot ul {list-style: none; margin-top: 12px 0px; padding: 0px;}
-.category {text-transform: uppercase; font-size: 9px; letter-spacing: .2em; padding-right: 6px;}
+.category {text-transform: uppercase; font-size: 12px; letter-spacing: .2em; padding-right: 6px;}
 
 #info p {font-size: 14px; padding: 4px; line-height: 19px; font-weight: 300;}
 #info {border-top: 4px #F8F8F8 solid;}

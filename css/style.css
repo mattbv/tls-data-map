@@ -48,6 +48,6 @@
 /* Map */
 
   .leaflet-popup-content {font-family: Merriweather;}
-  .leaflet-popup-content h2 {margin-bottom: 4px;}
+  .leaflet-popup-content h2 {margin-bottom: 6px;}
 
   img.petThumbs {height: 80px; width: 80px; border-radius: 1000px;}
