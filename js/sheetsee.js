@@ -1697,7 +1697,18 @@ function determineType(lineItem) {
 }
 
 module.exports.loadMap = function(mapDiv) {
-  var map = L.mapbox.map(mapDiv)
+
+  var map = L.map('map').setView([39.74739, -105], 13);
+
+  L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWF0aGV1c2J2IiwiYSI6ImNrb240MjdyODBhdGcyb29pNG1nc3pydmcifQ.NtjWDnOlW5hVFxcmT9xq1Q', {
+    	  maxZoom: 18,
+ 	  attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors, ' +
+  		  'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
+	  id: 'mapbox/light-v9',
+ 	  tileSize: 512,
+	  zoomOffset: -1
+  }).addTo(map);
+  //var map = L.mapbox.map(mapDiv)
   map.touchZoom.disable()
   map.doubleClickZoom.disable()
   map.scrollWheelZoom.disable()
